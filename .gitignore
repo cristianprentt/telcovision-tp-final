@@ -2,11 +2,11 @@
 __pycache__/
 *.pyc
 
-# DVC
-.dvc/
-*.dvc
-data/
-models/
+# DVC tracked data folders (pero aceptamos los .dvc)
+data/**/*
+!data/**/*.dvc
+models/**/*
+!models/**/*.dvc
 
 # Otros
 .DS_Store
