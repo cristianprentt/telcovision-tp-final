@@ -1,0 +1,10 @@
+stages:
+  prepare:
+    cmd: python3 src/data_prep.py
+    deps:
+    - data/raw/telco_churn.csv
+    - src/data_prep.py
+    params:
+    - prepare
+    outs:
+    - data/processed/telco_clean.csv

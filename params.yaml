@@ -1,0 +1,3 @@
+prepare:
+  input: "data/raw/telco_churn.csv"
+  output: "data/processed/telco_clean.csv"
