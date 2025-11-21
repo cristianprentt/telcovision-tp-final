@@ -1,13 +1,48 @@
-name: CI
+name: CI TelcoVision
 
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  dummy:
+  build-and-test:
     runs-on: ubuntu-latest
+
+    env:
+      DAGSHUB_USER: ${{ secrets.DAGSHUB_USER }}
+      DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+      DVC_REMOTE_URL: https://dagshub.com/${{ secrets.DAGSHUB_USER }}/telcovision-tp-final.dvc
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Say hello
-        run: echo "CI listo para TelcoVision"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configure DVC remote (DagsHub)
+        run: |
+          dvc remote remove dagshub 2>/dev/null || true
+          dvc remote add -d dagshub "$DVC_REMOTE_URL"
+          dvc remote modify dagshub --local auth basic
+          dvc remote modify dagshub --local user "$DAGSHUB_USER"
+          dvc remote modify dagshub --local password "$DAGSHUB_TOKEN"
+          dvc remote list
+
+      - name: Pull DVC data
+        run: dvc pull -v
+
+      - name: Reproduce pipeline
+        run: dvc repro -v
+
+      - name: Show metrics result
+        run: cat models/metrics.json || echo "No metrics yet"
