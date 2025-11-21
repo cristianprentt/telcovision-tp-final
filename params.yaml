@@ -1,3 +1,13 @@
 prepare:
   input: "data/raw/telco_churn.csv"
   output: "data/processed/telco_clean.csv"
+
+train:
+  input: "data/processed/telco_clean.csv"
+  target: "churn"
+  test_size: 0.25
+  solver: "liblinear"
+  C: 1.0
+  max_iter: 200
+  model_output: "models/model.pkl"
+  metrics_output: "models/metrics.json"

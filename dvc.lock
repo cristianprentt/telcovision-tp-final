@@ -21,3 +21,34 @@ stages:
       hash: md5
       md5: 006527876bfe18c977d74eb4bc59443f
       size: 873370
+  train:
+    cmd: python3 src/train.py
+    deps:
+    - path: data/processed/telco_clean.csv
+      hash: md5
+      md5: 006527876bfe18c977d74eb4bc59443f
+      size: 873370
+    - path: src/train.py
+      hash: md5
+      md5: 7ba6d92b3234b1ed5bd8115c9a19d86a
+      size: 2706
+    params:
+      params.yaml:
+        train:
+          input: data/processed/telco_clean.csv
+          target: churn
+          test_size: 0.25
+          solver: liblinear
+          C: 1.0
+          max_iter: 200
+          model_output: models/model.pkl
+          metrics_output: models/metrics.json
+    outs:
+    - path: models/metrics.json
+      hash: md5
+      md5: f1bb5c29619277052d46be99aa624b60
+      size: 134
+    - path: models/model.pkl
+      hash: md5
+      md5: f8579fb38b1c5b75f9ac1c74123e957a
+      size: 5341

@@ -8,3 +8,13 @@ stages:
     - prepare
     outs:
     - data/processed/telco_clean.csv
+  train:
+    cmd: python3 src/train.py
+    deps:
+    - data/processed/telco_clean.csv
+    - src/train.py
+    params:
+    - train
+    outs:
+    - models/metrics.json
+    - models/model.pkl
