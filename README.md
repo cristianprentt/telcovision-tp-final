@@ -42,19 +42,19 @@ Ideal para cualquier persona que quiera **reproducir el proyecto en un entorno n
 
 ## Estructura del repositorio
 
-telcovision-tp-final/
-├── data/
-│ ├── raw/ ← Dataset original (bajo control DVC)
-│ └── processed/ ← Limpieza y features (DVC)
-├── src/
-│ ├── data_prep.py ← ETL / Feature Engineering
-│ ├── experiments.py ← Ejecución múltiples modelos
-│ └── evaluate.py ← Model champion + métricas finales
-├── models/ ← Artefactos de entrenamiento (DVC)
-├── dvc.yaml ← Pipeline definido en DVC
-├── params.yaml ← Hiperparámetros
-├── requirements.txt ← Dependencias del proyecto
-└── .github/workflows/ ← CI/CD con GitHub Actions
+telcovision-tp-final/ <br>
+├── data/ <br>
+│ ├── raw/ ← Dataset original (bajo control DVC) <br>
+│ └── processed/ ← Limpieza y features (DVC) <br>
+├── src/ <br>
+│ ├── data_prep.py ← ETL / Feature Engineering <br>
+│ ├── experiments.py ← Ejecución múltiples modelos <br>
+│ └── evaluate.py ← Model champion + métricas finales <br>
+├── models/ ← Artefactos de entrenamiento (DVC) <br>
+├── dvc.yaml ← Pipeline definido en DVC <br>
+├── params.yaml ← Hiperparámetros <br>
+├── requirements.txt ← Dependencias del proyecto <br>
+└── .github/workflows/ ← CI/CD con GitHub Actions <br>
 
 ---
 
